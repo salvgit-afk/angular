@@ -1,0 +1,165 @@
+=====================================================================
+HANDOFF: sessione Claude Code sul progetto "task-manager" (corso Angular)
+Data ultima sessione: 2026-09-21
+Da incollare come primo messaggio a Claude Code sul PC di casa.
+=====================================================================
+
+ISTRUZIONI PER CLAUDE (leggi prima di rispondere)
+-------------------------------------------------
+- Rispondi in italiano.
+- Questo e' un PROGETTO DI APPRENDIMENTO. L'utente segue il corso
+  https://corso-angular.vercel.app/lezioni/lezione-NN/ (NN = 01..) e fa gli
+  esercizi nel repo. NON scrivere/modificare tu il codice degli esercizi:
+  spiega il concetto, mostra il codice IN CHAT, e lascia che sia l'utente a
+  scriverlo nei file. Poi, quando dice "fatto/controlla i file", leggi i file
+  e verifica (dicendo cosa e' corretto e cosa manca/da correggere).
+- Metodo che ha funzionato: per ogni lezione (1) leggi la pagina del corso con
+  WebFetch, (2) confronta col codice del repo, (3) spiega il concetto, (4)
+  indica modifiche precise (file + righe), (5) suggerisci come testare, (6)
+  quando l'utente dice "fatto" rileggi i file e segnala differenze.
+- Fai passi piccoli. Spiega il PERCHE' (l'utente vuole capire, non solo copiare).
+- Se il corso mostra codice diverso dal progetto (nomi, tipi, tecnologie),
+  segnala la differenza e la scelta fatta.
+- Non usare `git checkout/restore/reset` sui file dell'utente: ci sono molte
+  modifiche NON committate (vedi sotto). Non fare commit/push senza richiesta.
+- L'utente ha gia' sbagliato file una volta (ha incollato codice di test in un
+  file .component.ts invece che nel .spec.ts): ricorda sempre il nome esatto
+  del file dove va il codice.
+- Nella shell di Claude sul PC di lavoro `node` era v18 (la Angular CLI vuole
+  >=22): li' non si poteva eseguire `ng test`. L'utente lancia i comandi nel
+  suo terminale e incolla l'output. Verifica se a casa e' diverso.
+
+PROGETTO
+--------
+- Percorso (PC lavoro): /home/salvatore/work/angular/task-manager
+- Angular 22, standalone components, SSR + hydration (provideClientHydration),
+  zoneless (provideZonelessChangeDetection), Tailwind, TypeScript 6.
+- Test runner: VITEST (non Jasmine/Karma). angular.json usa
+  "@angular/build:unit-test"; tsconfig.spec.json ha types "vitest/globals".
+  Decisione presa con l'utente: restare su Vitest (default di Angular) invece
+  di migrare a Karma; il corso (lezione 16) parla di Jasmine/Karma, quindi
+  bisogna tradurre: spyOn -> vi.spyOn, jasmine.createSpy -> vi.fn(),
+  .and.returnValue -> .mockReturnValue, fakeAsync/tick -> vi.useFakeTimers().
+- Dipendenze NgRx installate: @ngrx/store, @ngrx/effects, @ngrx/store-devtools
+  (v22). Attenzione: npm install va lanciato DENTRO la cartella del progetto
+  (una volta l'utente l'ha lanciato in ~/work/angular e ha creato file
+  spazzatura; e' stato ripulito).
+- Comandi utili:
+    npx ng serve
+    npx ng test --watch=false
+    npx ng test --watch=false --include src/app/<file>.spec.ts
+  (i test sotto WSL sono lenti: da ~15s a ~5 minuti)
+- Git: branch main. Ultimo commit: 0f3b160 "avanzato fino a lezione 9".
+  TUTTO il lavoro delle lezioni 10-16 e' NON COMMITTATO. Consigliato
+  committare presto.
+
+STATO PER LEZIONE (corso Angular, lezioni 01-16 lette)
+------------------------------------------------------
+L01-L06  COMPLETE. Setup, ngModel, @for/@if/@empty, ngClass, pipe date/uppercase,
+         pipe custom troncaTesto (src/app/tronca-testo.pipe.ts), componenti
+         standalone, TaskItem con @Input/@Output, Router (/tasks, /tasks/:id,
+         /about) con navbar routerLink/routerLinkActive.
+L07      COMPLETA. Spinner nel dettaglio con Subject destroy$ + takeUntil
+         (poi superata dalla migrazione NgRx, vedi L14).
+L08      COMPLETA. src/app/auth.guard.ts: authGuard funzionale, legge
+         localStorage 'loggedIn' === 'true', altrimenti
+         router.createUrlTree(['/about']). Ha un controllo
+         isPlatformBrowser(PLATFORM_ID) perche' con SSR localStorage non esiste
+         sul server (senza, ReferenceError). Applicato SOLO a 'tasks/:id' in
+         app.routes.ts. Lazy loading di About con loadComponent.
+         Per testarlo: console browser -> localStorage.setItem('loggedIn','true')
+         o localStorage.removeItem('loggedIn').
+L09      COMPLETA. TaskService @Injectable providedIn root. Metodi rinominati
+         dall'utente come nel corso: getTasks/addTask/deleteTask/toggleTask.
+L10      COMPLETA. BehaviorSubject in TaskService, ricerca reattiva in TasksList
+         (FormControl + valueChanges + startWith('') + debounceTime(300) +
+         switchMap) e async pipe nel template.
+L11      COMPLETA. provideHttpClient(withInterceptors([loggingInterceptor])) in
+         app.config.ts; src/app/logging.interceptor.ts (console.log
+         'Request:', method, url). API: https://jsonplaceholder.typicode.com/todos
+         (risposta {id:number,title,completed}) mappata sul modello locale Task
+         {id:string, titolo, completato, dataCreazione:Date, priorita?, scadenza?}
+         con slice(0,10). NB: le POST di JSONPlaceholder non persistono.
+L12      COMPLETA. loadTasks() restituisce Observable con retry(2), map, tap,
+         catchError+throwError; stati loading/error nel template.
+L13      COMPLETA. Reactive Forms in TasksList: FormBuilder (fb dichiarato PRIMA
+         di taskForm), campi titolo (required, minLength 3), priorita
+         (bassa/media/alta), scadenza (validatore custom dataFuturaValidator ->
+         {dataPassata:true}). (ngSubmit)="aggiungi()".
+         Bug incontrati: il template era stato sovrascritto per errore dal solo
+         form (perso h1, ricerca, lista): ripristinato. Classi CSS mancanti su
+         select/date (overflow): risolto con flex-wrap e classi.
+L14      COMPLETA. NgRx in src/app/state/task/:
+           task.actions.ts   loadTasks, loadTasksSuccess{tasks},
+                             loadTasksFailure{error:string}, addTask{titolo,
+                             priorita?,scadenza?}, deleteTask{id:string},
+                             toggleTask{id,nuovoStato}   (id STRING, non number)
+           task.reducer.ts   TaskState {tasks, loading, error:string|null};
+                             add/delete/toggle gestiti direttamente dal reducer
+                             (sincroni, immutabili); solo loadTasks passa dagli
+                             effects.
+           task.effects.ts   loadTasks$: ofType(loadTasks) -> switchMap ->
+                             taskService.loadTasks() -> loadTasksSuccess /
+                             catchError DENTRO lo switchMap -> loadTasksFailure.
+           task.selectors.ts createFeatureSelector('tasks') (chiave = quella di
+                             provideStore({tasks: taskReducer})), selectAllTasks,
+                             selectLoading, selectError, selectTaskById(id)
+                             (factory).
+         app.config.ts: provideStore, provideEffects([TaskEffects]),
+         provideStoreDevtools({maxAge:25, logOnly:!isDevMode()}).
+         TasksList e TaskDetail usano Store (dispatch/select) + toSignal;
+         entrambi fanno dispatch(loadTasks()) in ngOnInit (TaskDetail serve per
+         l'accesso diretto all'URL). TaskService e' ora usato SOLO da
+         TaskEffects (loadTasks); i metodi getById, getByIdAsync, getTasks,
+         addTask, deleteTask, toggleTask sono codice morto (pulizia opzionale).
+L15      COMPLETA. TaskItem con ChangeDetectionStrategy.OnPush; tolto
+         [(ngModel)] (mutava lo stato NgRx) -> [checked]="task.completato" +
+         (change)="onToggleChange($event)" che emette event.target.checked;
+         FormsModule rimosso da TaskItem. Pipe pura filtraTask
+         (src/app/filtra-task.pipe.ts, tipo FiltroTask 'tutti'|'completati'|
+         'da-fare') sostituisce il flag soloCompletati; nel template:
+         @for (t of ((filteredTasks$ | async) ?? [] | filtraTask:filtro); track t.id)
+         con tre bottoni filtro. Risposte alle domande di verifica gia' date.
+L16      IN CORSO (Unit testing, su Vitest).
+         Passo 1 FATTO: sistemati gli spec autogenerati (nomi export sbagliati:
+         About->AboutComponent, App->AppComponent, TaskItemComponent->TaskItem;
+         aggiunti provideRouter([]) e provideMockStore({initialState:{tasks:
+         {tasks:[],loading:false,error:null}}}) dove serviva; per TaskItem
+         fixture.componentRef.setInput('task', {...}) prima di whenStable perche'
+         l'@Input e' required; nel test di AppComponent il vecchio test sul <h1>
+         e' stato sostituito da uno che conta i link 'nav a' = 2).
+         RISULTATO: `ng test --watch=false` -> 6 file, 7 test, tutti PASSATI.
+         Passo 2 PROPOSTO, NON CONFERMATO dall'utente:
+           - creare src/app/filtra-task.pipe.spec.ts (3 test: tutti/completati/
+             da-fare)
+           - spostare dataFuturaValidator da tasks-list.component.ts in un file
+             suo src/app/data-futura.validator.ts (esportato), aggiornare
+             l'import in TasksList, e creare data-futura.validator.spec.ts
+             (data passata -> {dataPassata:true}; futura -> null; vuoto -> null)
+         Passo 3 DA FARE: test di TaskService.loadTasks() con
+           provideHttpClient()+provideHttpClientTesting()+HttpTestingController.
+           Attenzione: mock nella forma dell'API ({id,title,completed}), risposta
+           tagliata a 10 elementi, retry(2) (nei test d'errore servono 3
+           richieste), afterEach(() => httpMock.verify()). Il corso chiama il
+           metodo getTasks() ma nel progetto il metodo HTTP e' loadTasks().
+         Passo 4 DA FARE: coverage (`ng test --code-coverage`; con Vitest
+           probabilmente serve @vitest/coverage-v8), minimo richiesto 70% dei
+           file chiave. Poi domande di verifica L16: differenza spyOn vs
+           createSpy (=> vi.spyOn vs vi.fn), come testare un componente con
+           async pipe, perche' httpMock.verify() in afterEach.
+
+DA FARE / IDEE OPZIONALI
+------------------------
+- Committare il lavoro (nulla dopo la lezione 9 e' salvato in git).
+- Pulire i metodi morti di TaskService e gli import inutilizzati.
+- Argomenti citati dal corso ma non esercitati: @switch (L03), @ViewChild e
+  ng-content (L05), Router.navigate programmatico (L06), OnChanges/AfterViewInit
+  (L07), effect "silenzioso" ({dispatch:false}) per la POST di addTask.
+- Dopo la lezione 16 leggere le successive (17+) dal sito del corso.
+
+NOTE DI STILE DELL'UTENTE
+-------------------------
+- Scrive in italiano, in modo breve; spesso dice "fatto, controlla i file" e si
+  aspetta che tu legga i file reali e dica cosa va bene/cosa manca.
+- Vuole essere GUIDATO: spiegazione + codice mostrato in chat + lui scrive.
+- Quando incolla output del terminale, analizzalo per intero prima di rispondere.

@@ -1,0 +1,72 @@
+:host {
+    --bright-blue: oklch(51.01% 0.274 263.83);
+    --electric-violet: oklch(53.18% 0.28 296.97);
+    --french-violet: oklch(47.66% 0.246 305.88);
+    --vivid-pink: oklch(69.02% 0.277 332.77);
+    --hot-red: oklch(61.42% 0.238 15.34);
+    --orange-red: oklch(63.32% 0.24 31.68);
+    --gray-900: oklch(19.37% 0.006 300.98);
+    --gray-700: oklch(36.98% 0.014 302.71);
+    --gray-400: oklch(70.9% 0.015 304.04);
+    --bg-gradient: radial-gradient(circle at top right, color-mix(in srgb, var(--bright-blue) 5%, transparent), transparent 40%);
+    --red-to-pink-to-purple-horizontal-gradient: linear-gradient(90deg, var(--hot-red), var(--vivid-pink), var(--french-violet));
+
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    display: block;
+    height: 100dvh;
+    background-color: oklch(98% 0 0);
+    background-image: var(--bg-gradient);
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: var(--gray-900);
+    font-weight: 800;
+    letter-spacing: -0.06rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--gray-900), var(--gray-700));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+main {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem;
+    box-sizing: inherit;
+}
+
+.left-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 420px;
+  background: white;
+  padding: 2rem;
+  border-radius: 1.25rem;
+  box-shadow: 0 10px 30px color-mix(in srgb, var(--gray-900) 6%, transparent);
+}
+
+.navbar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.navbar a {
+  color: var(--gray-700);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+}
+
+.navbar a.active {
+  color: white;
+  background: var(--bright-blue);
+}

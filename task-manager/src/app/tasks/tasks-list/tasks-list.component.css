@@ -1,0 +1,107 @@
+.task-container {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.filter-group { display: flex; gap: 0.5rem; }
+
+.filter-button {
+  display: inline-flex;
+  align-items: center;
+  background: color-mix(in srgb, var(--bright-blue) 6%, transparent);
+  color: var(--bright-blue);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid color-mix(in srgb, var(--bright-blue) 15%, transparent);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 1.25rem;
+}
+
+.filter-button:hover {
+  background: var(--bright-blue);
+  color: white;
+}
+
+.task-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.task-select,
+.task-date {
+  padding: 0.8rem 1rem;
+  font-size: 0.95rem;
+  border: 1px solid color-mix(in srgb, var(--gray-400) 50%, transparent);
+  border-radius: 0.75rem;
+  background-color: oklch(99% 0 0);
+  color: var(--gray-900);
+  outline: none;
+  flex: 0 1 160px;
+}
+
+.task-input {
+  flex: 1;
+  padding: 0.8rem 1rem;
+  font-size: 0.95rem;
+  border: 1px solid color-mix(in srgb, var(--gray-400) 50%, transparent);
+  border-radius: 0.75rem;
+  background-color: oklch(99% 0 0);
+  color: var(--gray-900);
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.task-input:focus {
+  background-color: white;
+  border-color: var(--bright-blue);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--bright-blue) 12%, transparent);
+}
+
+.task-button {
+  background: var(--red-to-pink-to-purple-horizontal-gradient);
+  color: white;
+  border: 0;
+  padding: 0.8rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--vivid-pink) 20%, transparent);
+}
+
+.task-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--vivid-pink) 35%, transparent);
+  opacity: 0.95;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.empty-msg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-700);
+  font-style: italic;
+  font-size: 0.9rem;
+  padding: 2rem;
+  border: 2px dashed color-mix(in srgb, var(--gray-400) 40%, transparent);
+  border-radius: 0.75rem;
+  background-color: oklch(98% 0 0);
+}

@@ -1,0 +1,16 @@
+@if (loading()) {
+  <div class="spinner-container">
+    <div class="spinner"></div>
+    <p>Caricamento...</p>
+  </div>
+} @else if (error()) {
+  <p class="error-msg">Errore nel caricamento del task.</p>
+} @else if (task()) {
+  <div class="task-detail">
+    <h2>{{ task()!.titolo }}</h2>
+    <p>Stato: {{ task()!.completato ? 'Completato' : 'Da fare' }}</p>
+    <p>Creato il: {{ task()!.dataCreazione | date:'dd/MM/yyyy' }}</p>
+  </div>
+} @else {
+  <p>Task non trovato</p>
+}

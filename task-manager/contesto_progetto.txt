@@ -1,0 +1,937 @@
+=== ./tsconfig.spec.json ===
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/spec",
+    "rootDir": ".",
+    "types": [
+      "vitest/globals"
+    ]
+  },
+  "include": [
+    "src/**/*.d.ts",
+    "src/**/*.spec.ts"
+  ]
+}
+
+=== ./tsconfig.app.json ===
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": [
+      "node"
+    ]
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/**/*.spec.ts"
+  ]
+}
+
+=== ./README.md ===
+# TaskManager
+
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.5.
+
+## Development server
+
+To start a local development server, run:
+
+```bash
+ng serve
+```
+
+Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+
+## Code scaffolding
+
+Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+
+```bash
+ng generate component component-name
+```
+
+For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+
+```bash
+ng generate --help
+```
+
+## Building
+
+To build the project run:
+
+```bash
+ng build
+```
+
+This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+
+## Running unit tests
+
+To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+
+```bash
+ng test
+```
+
+## Running end-to-end tests
+
+For end-to-end (e2e) testing, run:
+
+```bash
+ng e2e
+```
+
+Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+
+## Additional Resources
+
+For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+=== ./tsconfig.json ===
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "preserve"
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
+}
+
+=== ./package.json ===
+{
+  "name": "task-manager",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "serve:ssr:task-manager": "node dist/task-manager/server/server.mjs"
+  },
+  "private": true,
+  "packageManager": "npm@11.16.0",
+  "dependencies": {
+    "@angular/common": "^22.0.0",
+    "@angular/compiler": "^22.0.0",
+    "@angular/core": "^22.0.0",
+    "@angular/forms": "^22.0.0",
+    "@angular/platform-browser": "^22.0.0",
+    "@angular/platform-server": "^22.0.0",
+    "@angular/router": "^22.0.0",
+    "@angular/ssr": "^22.0.5",
+    "express": "^5.1.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^22.0.5",
+    "@angular/cli": "^22.0.5",
+    "@angular/compiler-cli": "^22.0.0",
+    "@tailwindcss/postcss": "^4.1.12",
+    "@types/express": "^5.0.1",
+    "@types/node": "^20.17.19",
+    "jsdom": "^28.0.0",
+    "postcss": "^8.5.3",
+    "prettier": "^3.8.1",
+    "tailwindcss": "^4.1.12",
+    "typescript": "~6.0.2",
+    "vitest": "^4.0.8"
+  }
+}
+=== ./angular.json ===
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "cli": {
+    "packageManager": "npm",
+    "analytics": false
+  },
+  "newProjectRoot": "projects",
+  "projects": {
+    "task-manager": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "type": "component",
+          "addTypeToClassName": false
+        },
+        "@schematics/angular:directive": {
+          "type": "directive",
+          "addTypeToClassName": false
+        },
+        "@schematics/angular:service": {
+          "type": "service",
+          "addTypeToClassName": false
+        },
+        "@schematics/angular:guard": {
+          "typeSeparator": "."
+        },
+        "@schematics/angular:interceptor": {
+          "typeSeparator": "."
+        },
+        "@schematics/angular:module": {
+          "typeSeparator": "."
+        },
+        "@schematics/angular:pipe": {
+          "typeSeparator": "."
+        },
+        "@schematics/angular:resolver": {
+          "typeSeparator": "."
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "src/main.ts",
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
+            "server": "src/main.server.ts",
+            "outputMode": "server",
+            "security": {
+              "allowedHosts": []
+            },
+            "ssr": {
+              "entry": "src/server.ts"
+            }
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "task-manager:build:production"
+            },
+            "development": {
+              "buildTarget": "task-manager:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test"
+        }
+      }
+    }
+  }
+}
+
+=== ./src/main.ts ===
+import { bootstrapApplication } from '@angular/platform-browser';
+import { appConfig } from './app/app.config';
+import { AppComponent } from './app/app.component';
+
+bootstrapApplication(AppComponent, appConfig)
+  .catch((err) => console.error(err));
+
+=== ./src/styles.css ===
+/* You can add global styles to this file, and also import other style files */
+
+@import 'tailwindcss';
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+::selection {
+    background-color: oklch(51.01% 0.274 263.83 / 25%);
+}
+
+=== ./src/index.html ===
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>TaskManager</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>
+
+=== ./src/main.server.ts ===
+import { BootstrapContext, bootstrapApplication } from '@angular/platform-browser';
+import { AppComponent } from './app/app.component';
+import { config } from './app/app.config.server';
+
+const bootstrap = (context: BootstrapContext) =>
+    bootstrapApplication(AppComponent, config, context);
+
+export default bootstrap;
+
+=== ./src/server.ts ===
+import {
+  AngularNodeAppEngine,
+  createNodeRequestHandler,
+  isMainModule,
+  writeResponseToNodeResponse,
+} from '@angular/ssr/node';
+import express from 'express';
+import { join } from 'node:path';
+
+const browserDistFolder = join(import.meta.dirname, '../browser');
+
+const app = express();
+const angularApp = new AngularNodeAppEngine();
+
+/**
+ * Example Express Rest API endpoints can be defined here.
+ * Uncomment and define endpoints as necessary.
+ *
+ * Example:
+ * ```ts
+ * app.get('/api/{*splat}', (req, res) => {
+ *   // Handle API request
+ * });
+ * ```
+ */
+
+/**
+ * Serve static files from /browser
+ */
+app.use(
+  express.static(browserDistFolder, {
+    maxAge: '1y',
+    index: false,
+    redirect: false,
+  }),
+);
+
+/**
+ * Handle all other requests by rendering the Angular application.
+ */
+app.use((req, res, next) => {
+  angularApp
+    .handle(req)
+    .then((response) =>
+      response ? writeResponseToNodeResponse(response, res) : next(),
+    )
+    .catch(next);
+});
+
+/**
+ * Start the server if this module is the main entry point, or it is ran via PM2.
+ * The server listens on the port defined by the `PORT` environment variable, or defaults to 4000.
+ */
+if (isMainModule(import.meta.url) || process.env['pm_id']) {
+  const port = process.env['PORT'] || 4000;
+  app.listen(port, (error) => {
+    if (error) {
+      throw error;
+    }
+
+    console.log(`Node Express server listening on http://localhost:${port}`);
+  });
+}
+
+/**
+ * Request handler used by the Angular CLI (for dev-server and during build) or Firebase Cloud Functions.
+ */
+export const reqHandler = createNodeRequestHandler(app);
+
+=== ./src/app/app.component.html ===
+<main>
+  <div class="left-side">
+    <app-tasks-list></app-tasks-list>
+  </div>
+</main>
+
+<router-outlet />
+=== ./src/app/tronca-testo.pipe.ts ===
+import { Pipe, PipeTransform } from '@angular/core';
+
+
+
+@Pipe({
+  name: 'troncaTesto',
+  standalone: true
+})
+export class TroncaTestoPipe implements PipeTransform {
+  transform(valore: string, limite: number = 20): string {
+    if (!valore) return '';
+    return valore.length > limite ? valore.substring(0, limite) + '...' : valore;
+  }
+}
+=== ./src/app/app.routes.ts ===
+import { Routes } from '@angular/router';
+
+export const routes: Routes = [];
+
+=== ./src/app/app.component.spec.ts ===
+import { TestBed } from '@angular/core/testing';
+import { App } from './app.component';
+
+describe('App', () => {
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [App],
+    }).compileComponents();
+  });
+
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+    expect(app).toBeTruthy();
+  });
+
+  it('should render title', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, task-manager');
+  });
+});
+
+=== ./src/app/app.routes.server.ts ===
+import { RenderMode, ServerRoute } from '@angular/ssr';
+
+export const serverRoutes: ServerRoute[] = [
+  {
+    path: '**',
+    renderMode: RenderMode.Prerender
+  }
+];
+
+=== ./src/app/app.config.server.ts ===
+import { mergeApplicationConfig, ApplicationConfig } from '@angular/core';
+import { provideServerRendering, withRoutes } from '@angular/ssr';
+import { appConfig } from './app.config';
+import { serverRoutes } from './app.routes.server';
+
+const serverConfig: ApplicationConfig = {
+  providers: [
+    provideServerRendering(withRoutes(serverRoutes))
+  ]
+};
+
+export const config = mergeApplicationConfig(appConfig, serverConfig);
+
+=== ./src/app/app.config.ts ===
+import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { provideRouter } from '@angular/router';
+
+import { routes } from './app.routes';
+import { provideClientHydration } from '@angular/platform-browser';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideBrowserGlobalErrorListeners(),
+    provideRouter(routes), provideClientHydration()
+  ]
+};
+
+=== ./src/app/tronca-testo.pipe.spec.ts ===
+import { TroncaTestoPipe } from './tronca-testo.pipe';
+
+describe('TroncaTestoPipe', () => {
+  it('create an instance', () => {
+    const pipe = new TroncaTestoPipe();
+    expect(pipe).toBeTruthy();
+  });
+});
+
+=== ./src/app/app.component.ts ===
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { TasksListComponent } from './tasks/tasks-list/tasks-list.component';
+
+
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, TasksListComponent],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
+})
+export class AppComponent {}
+=== ./src/app/app.component.css ===
+:host {
+    --bright-blue: oklch(51.01% 0.274 263.83);
+    --electric-violet: oklch(53.18% 0.28 296.97);
+    --french-violet: oklch(47.66% 0.246 305.88);
+    --vivid-pink: oklch(69.02% 0.277 332.77);
+    --hot-red: oklch(61.42% 0.238 15.34);
+    --orange-red: oklch(63.32% 0.24 31.68);
+    --gray-900: oklch(19.37% 0.006 300.98);
+    --gray-700: oklch(36.98% 0.014 302.71);
+    --gray-400: oklch(70.9% 0.015 304.04);
+    --bg-gradient: radial-gradient(circle at top right, color-mix(in srgb, var(--bright-blue) 5%, transparent), transparent 40%);
+    --red-to-pink-to-purple-horizontal-gradient: linear-gradient(90deg, var(--hot-red), var(--vivid-pink), var(--french-violet));
+
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    display: block;
+    height: 100dvh;
+    background-color: oklch(98% 0 0);
+    background-image: var(--bg-gradient);
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: var(--gray-900);
+    font-weight: 800;
+    letter-spacing: -0.06rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--gray-900), var(--gray-700));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+main {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem;
+    box-sizing: inherit;
+}
+
+.left-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 420px;
+  background: white;
+  padding: 2rem;
+  border-radius: 1.25rem;
+  box-shadow: 0 10px 30px color-mix(in srgb, var(--gray-900) 6%, transparent);
+}
+=== ./src/app/tasks/tasks-list/tasks-list.component.css ===
+.task-container {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.filter-button {
+  display: inline-flex;
+  align-items: center;
+  background: color-mix(in srgb, var(--bright-blue) 6%, transparent);
+  color: var(--bright-blue);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid color-mix(in srgb, var(--bright-blue) 15%, transparent);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 1.25rem;
+}
+
+.filter-button:hover {
+  background: var(--bright-blue);
+  color: white;
+}
+
+.task-form {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.task-input {
+  flex: 1;
+  padding: 0.8rem 1rem;
+  font-size: 0.95rem;
+  border: 1px solid color-mix(in srgb, var(--gray-400) 50%, transparent);
+  border-radius: 0.75rem;
+  background-color: oklch(99% 0 0);
+  color: var(--gray-900);
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.task-input:focus {
+  background-color: white;
+  border-color: var(--bright-blue);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--bright-blue) 12%, transparent);
+}
+
+.task-button {
+  background: var(--red-to-pink-to-purple-horizontal-gradient);
+  color: white;
+  border: 0;
+  padding: 0.8rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--vivid-pink) 20%, transparent);
+}
+
+.task-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--vivid-pink) 35%, transparent);
+  opacity: 0.95;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.empty-msg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-700);
+  font-style: italic;
+  font-size: 0.9rem;
+  padding: 2rem;
+  border: 2px dashed color-mix(in srgb, var(--gray-400) 40%, transparent);
+  border-radius: 0.75rem;
+  background-color: oklch(98% 0 0);
+}
+=== ./src/app/tasks/tasks-list/tasks-list.component.spec.ts ===
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { TasksList } from './tasks-list.component';
+
+describe('TasksList', () => {
+  let component: TasksList;
+  let fixture: ComponentFixture<TasksList>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [TasksList],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TasksList);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+
+=== ./src/app/tasks/tasks-list/tasks-list.component.ts ===
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { TaskItemComponent } from '../task-item/task-item.component';
+import { TroncaTestoPipe } from '../../tronca-testo.pipe';
+
+interface Task {
+  id: string;
+  titolo: string;
+  completato: boolean;
+  dataCreazione: Date;
+}
+
+@Component({
+  selector: 'app-tasks-list',
+  standalone: true,
+  imports: [CommonModule, FormsModule, TaskItemComponent, TroncaTestoPipe],
+  templateUrl: './tasks-list.component.html',
+  styleUrl: './tasks-list.component.css'
+})
+export class TasksListComponent {
+  tasks: Task[] = [
+    { id: crypto.randomUUID(), titolo: 'Task di prova Lezione 4', completato: false, dataCreazione: new Date() }
+  ];
+  nuovoTask = '';
+  soloCompletati = false;
+
+  aggiungi() {
+    if (this.nuovoTask.trim()) {
+      this.tasks.push({ 
+        id: crypto.randomUUID(),
+        titolo: this.nuovoTask, 
+        completato: false, 
+        dataCreazione: new Date() 
+      });
+      this.nuovoTask = '';
+    }
+  }
+
+  elimina(index: number) {
+    this.tasks.splice(index, 1);
+  }
+
+  gestisciToggle(index: number, nuovoStato: boolean) {
+    this.tasks[index].completato = nuovoStato;
+  }
+}
+=== ./src/app/tasks/tasks-list/tasks-list.component.html ===
+<h1>Benvenuto nel tuo Task Manager, hai {{ tasks.length }} tasks</h1>
+
+<div class="task-container">
+  <button type="button" class="filter-button" (click)="soloCompletati = !soloCompletati">
+    {{ soloCompletati ? 'Mostra tutti' : 'Solo completati' }}
+  </button>
+
+  <form class="task-form" (submit)="aggiungi(); $event.preventDefault()">
+    <input 
+      [(ngModel)]="nuovoTask" 
+      name="nuovoTask"
+      class="task-input" 
+      placeholder="Inserisci qui la tua task!"
+      autocomplete="off"
+    >
+    <button type="submit" class="task-button">Aggiungi</button>
+  </form>
+
+  <ul class="task-list">
+    @for (t of tasks; track t.id; let i = $index) {
+      @if (!soloCompletati || t.completato) {
+        <app-task-item 
+          [task]="t" 
+          (delete)="elimina(i)"
+          (toggle)="gestisciToggle(i, $event)">
+        </app-task-item>
+      }
+    } @empty {
+      <li class="task-item empty-msg">Nessun task da mostrare</li>
+    }
+  </ul>
+</div>
+=== ./src/app/tasks/task-item/task-item.component.spec.ts ===
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TaskItemComponent } from './task-item.component';
+
+
+
+describe('TaskItem', () => {
+  let component: TaskItemComponent;
+  let fixture: ComponentFixture<TaskItemComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [TaskItemComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TaskItemComponent);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+
+=== ./src/app/tasks/task-item/task-item.component.html ===
+<li class="task-item" [ngClass]="{ 'completato': task.completato }">
+  <label class="task-label">
+    <input 
+      type="checkbox" 
+      [(ngModel)]="task.completato"
+      (change)="onToggleChange()"
+      class="task-checkbox"
+    >
+    <span class="task-text">
+      {{ task.titolo | troncaTesto:25 }} — 
+      <span class="task-date">{{ task.dataCreazione | date:'dd/MM/yyyy' | uppercase }}</span>
+    </span>
+  </label>
+
+  <button class="delete-button" (click)="onDeleteClick()" aria-label="Elimina task">
+    <svg xmlns="http://w3.org" height="20" viewBox="0 -960 960 960" width="20" fill="currentColor">
+      <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/>
+    </svg>
+  </button>
+</li>
+=== ./src/app/tasks/task-item/task-item.component.css ===
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background-color: white;
+  color: var(--gray-900);
+  border-radius: 0.75rem;
+  font-size: 0.95rem;
+  border: 1px solid color-mix(in srgb, var(--gray-400) 30%, transparent);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px color-mix(in srgb, var(--gray-900) 2%, transparent);
+}
+
+.task-item:hover {
+  border-color: color-mix(in srgb, var(--bright-blue) 30%, transparent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px color-mix(in srgb, var(--bright-blue) 6%, transparent);
+}
+
+.task-label {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  cursor: pointer;
+  flex: 1;
+}
+
+.task-text {
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+
+.task-item.completato {
+  background-color: oklch(96% 0 0);
+  border-color: color-mix(in srgb, var(--gray-400) 20%, transparent);
+}
+
+.task-item.completato .task-text {
+  color: var(--gray-400);
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.task-checkbox {
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+  accent-color: var(--bright-blue);
+  border-radius: 0.35rem;
+}
+
+.task-date {
+  font-size: 0.75rem;
+  color: var(--bright-blue);
+  background-color: color-mix(in srgb, var(--bright-blue) 8%, transparent);
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.35rem;
+  margin-left: auto;
+  margin-right: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.delete-button {
+  background: transparent;
+  border: 0;
+  color: var(--gray-400);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.delete-button:hover {
+  color: var(--hot-red);
+  background-color: color-mix(in srgb, var(--hot-red) 10%, transparent);
+}
+=== ./src/app/tasks/task-item/task-item.component.ts ===
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { TroncaTestoPipe } from '../../tronca-testo.pipe';
+
+
+
+interface Task {
+  id: string;
+  titolo: string;
+  completato: boolean;
+  dataCreazione: Date;
+}
+
+@Component({
+  selector: 'app-task-item',
+  standalone: true,
+  imports: [CommonModule, FormsModule, TroncaTestoPipe],
+  templateUrl: './task-item.component.html',
+  styleUrl: './task-item.component.css'
+})
+export class TaskItemComponent {
+  @Input({ required: true }) task!: Task;
+  @Output() delete = new EventEmitter<void>();
+  @Output() toggle = new EventEmitter<boolean>();
+
+  onToggleChange() {
+    this.toggle.emit(this.task.completato);
+  }
+
+  onDeleteClick() {
+    this.delete.emit();
+  }
+}

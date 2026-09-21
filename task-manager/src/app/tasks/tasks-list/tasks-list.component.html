@@ -1,0 +1,54 @@
+<h1>Benvenuto nel tuo Task Manager, hai {{ tasks.length }} tasks</h1>
+
+<div class="task-container">
+  @if (loading()) {
+    <p>Caricamento task...</p>
+  } @else if (error()) {
+    <p class="error-msg">Errore nel caricamento dei task. Riprova più tardi.</p>
+  } @else {
+    <input [formControl]="searchControl" class="search-input" placeholder="Cerca task...">
+
+    <div class="filter-group">
+      <button type="button" class="filter-button" (click)="filtro = 'tutti'">Tutti</button>
+      <button type="button" class="filter-button" (click)="filtro = 'completati'">Completati</button>
+      <button type="button" class="filter-button" (click)="filtro = 'da-fare'">Da fare</button>
+    </div>
+
+    <form class="task-form" [formGroup]="taskForm" (ngSubmit)="aggiungi()">
+      <input 
+        formControlName="titolo"
+        class="task-input" 
+        placeholder="Inserisci qui la tua task!"
+        autocomplete="off"
+      >
+      @if (taskForm.controls.titolo.invalid && taskForm.controls.titolo.touched) {
+        <span class="error-msg">Titolo obbligatorio, minimo 3 caratteri</span>
+      }
+
+      <select formControlName="priorita" class="task-select">
+        <option value="bassa">Bassa</option>
+        <option value="media">Media</option>
+        <option value="alta">Alta</option>
+      </select>
+
+      <input type="date" formControlName="scadenza" class="task-date">
+      @if (taskForm.controls.scadenza.errors?.['dataPassata']) {
+        <span class="error-msg">La scadenza non può essere nel passato</span>
+      }
+
+      <button type="submit" class="task-button" [disabled]="taskForm.invalid">Aggiungi</button>
+    </form>
+
+    <ul class="task-list">
+      @for (t of ((filteredTasks$ | async) ?? [] | filtraTask:filtro); track t.id) {
+        <app-task-item 
+          [task]="t" 
+          (delete)="elimina(t.id)"
+          (toggle)="gestisciToggle(t.id, $event)">
+        </app-task-item>
+      } @empty {
+        <li class="task-item empty-msg">Nessun task da mostrare</li>
+      }
+    </ul>
+  }
+</div>

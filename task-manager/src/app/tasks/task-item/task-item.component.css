@@ -1,0 +1,81 @@
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background-color: white;
+  color: var(--gray-900);
+  border-radius: 0.75rem;
+  font-size: 0.95rem;
+  border: 1px solid color-mix(in srgb, var(--gray-400) 30%, transparent);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px color-mix(in srgb, var(--gray-900) 2%, transparent);
+}
+
+.task-item:hover {
+  border-color: color-mix(in srgb, var(--bright-blue) 30%, transparent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px color-mix(in srgb, var(--bright-blue) 6%, transparent);
+}
+
+.task-label {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  cursor: pointer;
+  flex: 1;
+}
+
+.task-text {
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+
+.task-item.completato {
+  background-color: oklch(96% 0 0);
+  border-color: color-mix(in srgb, var(--gray-400) 20%, transparent);
+}
+
+.task-item.completato .task-text {
+  color: var(--gray-400);
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.task-checkbox {
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+  accent-color: var(--bright-blue);
+  border-radius: 0.35rem;
+}
+
+.task-date {
+  font-size: 0.75rem;
+  color: var(--bright-blue);
+  background-color: color-mix(in srgb, var(--bright-blue) 8%, transparent);
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.35rem;
+  margin-left: auto;
+  margin-right: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.delete-button {
+  background: transparent;
+  border: 0;
+  color: var(--gray-400);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.delete-button:hover {
+  color: var(--hot-red);
+  background-color: color-mix(in srgb, var(--hot-red) 10%, transparent);
+}
