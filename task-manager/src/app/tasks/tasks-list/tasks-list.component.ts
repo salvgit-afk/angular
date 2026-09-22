@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, ReactiveFormsModule, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Store } from '@ngrx/store';
 import { TaskItem } from '../task-item/task-item.component';
@@ -9,13 +9,9 @@ import { debounceTime, startWith, switchMap, map } from 'rxjs';
 import { loadTasks, addTask, deleteTask, toggleTask } from '../../state/task/task.actions';
 import { selectAllTasks, selectLoading, selectError } from '../../state/task/task.selectors';
 import { FiltraTaskPipe, FiltroTask } from '../../filtra-task.pipe';
+import { dataFuturaValidator } from '../../data-futura.validator';
 
-function dataFuturaValidator(control: AbstractControl): ValidationErrors | null {
-  if (!control.value) return null;
-  const oggi = new Date();
-  oggi.setHours(0, 0, 0, 0);
-  return new Date(control.value) < oggi ? { dataPassata: true } : null;
-}
+
 
 @Component({
   selector: 'app-tasks-list',
